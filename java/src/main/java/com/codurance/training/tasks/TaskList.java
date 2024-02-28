@@ -67,12 +67,16 @@ public final class TaskList implements Runnable {
         commandMap.getOrDefault(command, this::error).accept(commandRest.length > 1 ? commandRest[1] : null);
     }
 
+    private void displayTask(List<Task> taskList){
+        for (Task task : taskList) {
+            out.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());
+        }
+    }
+
     private void show(String arg) {
         for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
             out.println(project.getKey());
-            for (Task task : project.getValue()) {
-                out.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());
-            }
+            displayTask(project.getValue());
             out.println();
         }
     }
