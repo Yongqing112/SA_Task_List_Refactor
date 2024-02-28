@@ -55,6 +55,7 @@ public final class TaskList implements Runnable {
         commandMap = new HashMap<String, Consumer<String>>();
         commandMap.put("show", this::show);
         commandMap.put("add", this::add);
+        commandMap.put("delete", this::delete);
         commandMap.put("check", this::check);
         commandMap.put("uncheck", this::uncheck);
         commandMap.put("help", this::help);
@@ -108,6 +109,28 @@ public final class TaskList implements Runnable {
         }
         List<Task> projectTasks = tasks.get(project);
         projectTasks.add(new Task(nextId(), description, false));
+    }
+
+    private int taskIndex(int id, List<Task> taskList){
+        for (Task task : taskList) {
+            if (task.getId() == id) {
+                return taskList.indexOf(task);
+            }
+        }
+        return -1;
+    }
+
+    private void delete(String idString){
+        int id = Integer.parseInt(idString);
+        for (List<Task> taskList: tasks.values()) {
+            int index = taskIndex(id, taskList);
+            if(index != -1){
+                taskList.remove(index);
+                return;
+            }
+        }
+        out.printf("Could not find a task with an ID of %d.", id);
+        out.println();
     }
 
     private void check(String idString) {
