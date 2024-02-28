@@ -10,19 +10,16 @@ import java.util.function.Consumer;
 
 public final class TaskListRun implements Runnable {
     private static final String QUIT = "quit";
-
-    private final Map<String, List<Task>> tasks = new LinkedHashMap<>();
-    private Map<String, Consumer<String>> commandMap;
+    private Map<String, Command> commandMap;
     private final BufferedReader in;
     private final PrintWriter out;
-    private final TaskList taskList;
+    private static final TaskList taskList = new TaskList();
 
-    private long lastId = 0;
+    private String[] commandRest;
 
     public TaskListRun(BufferedReader reader, PrintWriter writer) {
         this.in = reader;
         this.out = writer;
-        taskList = new TaskList(in, out);
     }
 
     public static void main(String[] args) throws Exception {
@@ -50,19 +47,23 @@ public final class TaskListRun implements Runnable {
     }
 
     private void initializeCommandMap() {
-        commandMap = new HashMap<String, Consumer<String>>();
-        commandMap.put("show", this::show);
-        commandMap.put("add", this::add);
-        commandMap.put("delete", this::delete);
-        commandMap.put("check", this::check);
-        commandMap.put("uncheck", this::uncheck);
-        commandMap.put("help", this::help);
+        commandMap = new HashMap<String, Command>();
+        commandMap.put("show", new ShowCommand());
+        commandMap.put("add", new AddCommand());
+        commandMap.put("delete", new DeleteCommand());
+        commandMap.put("check", new CheckCommand());
+        commandMap.put("uncheck", new UnCheckCommand());
+        commandMap.put("help", new HelpCommand());
     }
 
     private void execute(String commandLine) {
-        String[] commandRest = commandLine.split(" ", 2);
-        String command = commandRest[0];
-
-        commandMap.getOrDefault(command, this::error).accept(commandRest.length > 1 ? commandRest[1] : null);
+        commandRest = commandLine.split(" ", 2);
+        Command command = commandMap.getOrDefault(commandRest[0], new ErrorCommand());
+        if(commandRest.length > 1){
+            command.execute(commandRest[1], taskList.getTaskList());
+        }
+        else{
+            command.execute(null, taskList.getTaskList());
+        }
     }
 }
