@@ -96,6 +96,23 @@ public final class ApplicationTest {
                 ""
         );
 
+        execute("delete 3");
+
+        execute("show");
+        readLines(
+                "secrets",
+                "    [x] 1: Eat more donuts.",
+                "    [ ] 2: Destroy all humans.",
+                "",
+                "training",
+                "    [ ] 4: SOLID",
+                "    [x] 5: Coupling and Cohesion",
+                "    [x] 6: Primitive Obsession",
+                "    [ ] 7: Outside-In TDD",
+                "    [ ] 8: Interaction-Driven Design",
+                ""
+        );
+
         execute("quit");
     }
 
