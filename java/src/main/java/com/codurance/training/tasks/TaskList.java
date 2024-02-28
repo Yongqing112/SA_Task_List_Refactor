@@ -96,13 +96,17 @@ public final class TaskList implements Runnable {
         tasks.put(name, new ArrayList<Task>());
     }
 
+    private boolean isProjectExist(String project){
+        return tasks.containsKey(project);
+    }
+
     private void addTask(String project, String description) {
-        List<Task> projectTasks = tasks.get(project);
-        if (projectTasks == null) {
+        if (!isProjectExist(project)) {
             out.printf("Could not find a project with the name \"%s\".", project);
             out.println();
             return;
         }
+        List<Task> projectTasks = tasks.get(project);
         projectTasks.add(new Task(nextId(), description, false));
     }
 
@@ -114,14 +118,22 @@ public final class TaskList implements Runnable {
         setDone(idString, false);
     }
 
+    private Task findTask(int id, Map.Entry<String, List<Task>> project){
+        for (Task task : project.getValue()) {
+            if (task.getId() == id) {
+                return task;
+            }
+        }
+        return null;
+    }
+
     private void setDone(String idString, boolean done) {
         int id = Integer.parseInt(idString);
         for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
-            for (Task task : project.getValue()) {
-                if (task.getId() == id) {
-                    task.setDone(done);
-                    return;
-                }
+            Task task = findTask(id, project);
+            if(task != null){
+                task.setDone(done);
+                return;
             }
         }
         out.printf("Could not find a task with an ID of %d.", id);
