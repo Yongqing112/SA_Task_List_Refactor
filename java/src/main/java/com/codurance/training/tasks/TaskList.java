@@ -8,11 +8,15 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
+import java.util.function.Consumer;
+
 
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
 
     private final Map<String, List<Task>> tasks = new LinkedHashMap<>();
+    private Map<String, Consumer<String>> commandMap;
     private final BufferedReader in;
     private final PrintWriter out;
 
@@ -42,36 +46,28 @@ public final class TaskList implements Runnable {
             if (command.equals(QUIT)) {
                 break;
             }
+            initializeCommandMap();
             execute(command);
         }
+    }
+
+    private void initializeCommandMap() {
+        commandMap = new HashMap<String, Consumer<String>>();
+        commandMap.put("show", this::show);
+        commandMap.put("add", this::add);
+        commandMap.put("check", this::check);
+        commandMap.put("uncheck", this::uncheck);
+        commandMap.put("help", this::help);
     }
 
     private void execute(String commandLine) {
         String[] commandRest = commandLine.split(" ", 2);
         String command = commandRest[0];
-        switch (command) {
-            case "show":
-                show();
-                break;
-            case "add":
-                add(commandRest[1]);
-                break;
-            case "check":
-                check(commandRest[1]);
-                break;
-            case "uncheck":
-                uncheck(commandRest[1]);
-                break;
-            case "help":
-                help();
-                break;
-            default:
-                error(command);
-                break;
-        }
+
+        commandMap.getOrDefault(command, this::error).accept(commandRest.length > 1 ? commandRest[1] : null);
     }
 
-    private void show() {
+    private void show(String arg) {
         for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
             out.println(project.getKey());
             for (Task task : project.getValue()) {
@@ -128,7 +124,7 @@ public final class TaskList implements Runnable {
         out.println();
     }
 
-    private void help() {
+    private void help(String arg) {
         out.println("Commands:");
         out.println("  show");
         out.println("  add project <project name>");
