@@ -6,14 +6,13 @@ import java.util.Map;
 
 
 public final class TaskList {
-    private static final String QUIT = "quit";
 
-    private static final Map<String, List<Task>> tasks = new LinkedHashMap<>();
+    private final Map<String, List<Task>> tasks = new LinkedHashMap<>();
 
     public TaskList() {
     }
 
-    public static Map<String, List<Task>> getTaskList(){
+    public Map<String, List<Task>> getTaskList(){
         return tasks;
     }
 }

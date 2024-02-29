@@ -5,13 +5,17 @@ import java.util.List;
 import java.util.Map;
 
 public class UnCheckCommand implements Command{
-    private final PrintWriter out = Output.getInstance().output();
+    private final PrintWriter out;
 
-    public UnCheckCommand(){
+    private final Map<String, List<Task>> projects;
+
+    public UnCheckCommand(Map<String, List<Task>> projects, PrintWriter out){
+        this.projects = projects;
+        this.out = out;
     }
 
     @Override
-    public void execute(String idString, Map<String, List<Task>> projects) {
+    public void execute(String idString) {
         setDone(idString, false, projects);
     }
 

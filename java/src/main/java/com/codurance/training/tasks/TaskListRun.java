@@ -5,21 +5,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.*;
-import java.util.function.Consumer;
 
 
 public final class TaskListRun implements Runnable {
     private static final String QUIT = "quit";
+
     private Map<String, Command> commandMap;
     private final BufferedReader in;
     private final PrintWriter out;
-    private static final TaskList taskList = new TaskList();
-
-    private String[] commandRest;
+    private final TaskList taskList;
 
     public TaskListRun(BufferedReader reader, PrintWriter writer) {
         this.in = reader;
         this.out = writer;
+        taskList = new TaskList();
     }
 
     public static void main(String[] args) throws Exception {
@@ -48,22 +47,22 @@ public final class TaskListRun implements Runnable {
 
     private void initializeCommandMap() {
         commandMap = new HashMap<String, Command>();
-        commandMap.put("show", new ShowCommand());
-        commandMap.put("add", new AddCommand());
-        commandMap.put("delete", new DeleteCommand());
-        commandMap.put("check", new CheckCommand());
-        commandMap.put("uncheck", new UnCheckCommand());
-        commandMap.put("help", new HelpCommand());
+        commandMap.put("show", new ShowCommand(taskList.getTaskList(), out));
+        commandMap.put("add", new AddCommand(taskList.getTaskList(), out));
+        commandMap.put("delete", new DeleteCommand(taskList.getTaskList(), out));
+        commandMap.put("check", new CheckCommand(taskList.getTaskList(), out));
+        commandMap.put("uncheck", new UnCheckCommand(taskList.getTaskList(), out));
+        commandMap.put("help", new HelpCommand(out));
     }
 
     private void execute(String commandLine) {
-        commandRest = commandLine.split(" ", 2);
-        Command command = commandMap.getOrDefault(commandRest[0], new ErrorCommand());
+        String[] commandRest = commandLine.split(" ", 2);
+        Command command = commandMap.getOrDefault(commandRest[0], new ErrorCommand(out));
         if(commandRest.length > 1){
-            command.execute(commandRest[1], taskList.getTaskList());
+            command.execute(commandRest[1]);
         }
         else{
-            command.execute(null, taskList.getTaskList());
+            command.execute(commandLine);
         }
     }
 }

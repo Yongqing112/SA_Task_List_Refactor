@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 public class ShowCommand implements Command{
-    private final PrintWriter out = Output.getInstance().output();
+    private final PrintWriter out;
+    private final Map<String, List<Task>> projects;
 
-    public ShowCommand(){
+    public ShowCommand(Map<String, List<Task>> projects, PrintWriter out){
+        this.projects = projects;
+        this.out = out;
     }
 
     private void displayTask(List<Task> taskList){
@@ -16,12 +19,9 @@ public class ShowCommand implements Command{
         }
     }
     @Override
-    public void execute(String arg, Map<String, List<Task>> projects) {
+    public void execute(String arg) {
         for (Map.Entry<String, List<Task>> project : projects.entrySet()) {
             out.println(project.getKey());
-            for (Task task : project.getValue()) {
-                System.out.println();
-            }
             displayTask(project.getValue());
             out.println();
         }

@@ -6,13 +6,16 @@ import java.util.Map;
 
 public class CheckCommand implements Command{
 
-    private final PrintWriter out = Output.getInstance().output();
+    private final PrintWriter out;
+    private final Map<String, List<Task>> projects;
 
-    public CheckCommand(){
+    public CheckCommand(Map<String, List<Task>> projects, PrintWriter out){
+        this.projects = projects;
+        this.out = out;
     }
 
     @Override
-    public void execute(String idString, Map<String, List<Task>> projects) {
+    public void execute(String idString) {
         setDone(idString, true, projects);
     }
 

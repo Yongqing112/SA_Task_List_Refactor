@@ -6,19 +6,21 @@ import java.util.List;
 import java.util.Map;
 
 public class AddCommand implements Command{
-    private final PrintWriter out = Output.getInstance().output();
+    private final PrintWriter out;
+    private final Map<String, List<Task>> projects;
+    private static long lastId = 0;
 
-    private long lastId = 0;
-
-    public AddCommand(){
+    public AddCommand(Map<String, List<Task>> projects, PrintWriter out){
+        this.projects = projects;
+        this.out = out;
     }
 
     @Override
-    public void execute(String commandLine, Map<String, List<Task>> projects) {
+    public void execute(String commandLine) {
         String[] subcommandRest = commandLine.split(" ", 2);
         String subcommand = subcommandRest[0];
         if (subcommand.equals("project")) {
-            addProject(subcommandRest[1], projects);
+            addProject(subcommandRest[1], this.projects);
         } else if (subcommand.equals("task")) {
             String[] projectTask = subcommandRest[1].split(" ", 2);
             addTask(projectTask[0], projectTask[1], projects);

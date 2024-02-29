@@ -1,18 +1,17 @@
 package com.codurance.training.tasks;
 
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.Map;
 
 public class HelpCommand implements Command{
 
-    private final PrintWriter out = Output.getInstance().output();
+    private final PrintWriter out;
 
-    public HelpCommand(){
+    public HelpCommand(PrintWriter out){
+        this.out = out;
     }
 
     @Override
-    public void execute(String arg, Map<String, List<Task>> projects) {
+    public void execute(String arg) {
         out.println("Commands:");
         out.println("  show");
         out.println("  add project <project name>");

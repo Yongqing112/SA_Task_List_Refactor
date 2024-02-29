@@ -1,19 +1,17 @@
 package com.codurance.training.tasks;
 
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.Map;
 
 public class ErrorCommand implements Command{
 
-    private final PrintWriter out = Output.getInstance().output();
+    private final PrintWriter out;
 
-    public ErrorCommand(){
-
+    public ErrorCommand(PrintWriter out){
+        this.out = out;
     }
 
     @Override
-    public void execute(String commandLine, Map<String, List<Task>> projects) {
+    public void execute(String commandLine) {
         out.printf("I don't know what the command \"%s\" is.", commandLine);
         out.println();
     }

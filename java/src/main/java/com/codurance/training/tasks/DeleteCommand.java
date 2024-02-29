@@ -6,10 +6,14 @@ import java.util.Map;
 
 public class DeleteCommand implements Command {
 
-    private final PrintWriter out = Output.getInstance().output();
+    private final PrintWriter out;
+    private final Map<String, List<Task>> projects;
 
-    public DeleteCommand(){
+    public DeleteCommand(Map<String, List<Task>> projects, PrintWriter out){
+        this.projects = projects;
+        this.out = out;
     }
+
 
     private int taskIndex(int id, List<Task> taskList){
         for (Task task : taskList) {
@@ -21,7 +25,7 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void execute(String idString, Map<String, List<Task>> projects) {
+    public void execute(String idString) {
         int id = Integer.parseInt(idString);
         for (List<Task> taskList: projects.values()) {
             int index = taskIndex(id, taskList);
