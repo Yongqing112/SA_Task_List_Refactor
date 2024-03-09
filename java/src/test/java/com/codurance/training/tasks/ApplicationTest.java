@@ -6,6 +6,10 @@ import java.io.InputStreamReader;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintWriter;
+
+import com.codurance.training.io.Input;
+import com.codurance.training.io.Output;
+import com.codurance.training.entity.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,8 +29,8 @@ public final class ApplicationTest {
     private Thread applicationThread;
 
     public ApplicationTest() throws IOException {
-        BufferedReader in = new BufferedReader(new InputStreamReader(new PipedInputStream(inStream)));
-        PrintWriter out = new PrintWriter(new PipedOutputStream(outStream), true);
+        Input in = new Input(new BufferedReader(new InputStreamReader(new PipedInputStream(inStream))));
+        Output out = new Output(new PrintWriter(new PipedOutputStream(outStream), true));
         TaskListRun taskList = new TaskListRun(in, out);
         applicationThread = new Thread(taskList);
     }
