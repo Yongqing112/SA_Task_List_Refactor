@@ -1,4 +1,4 @@
-package com.codurance.training.tasks;
+package com.codurance.training.entity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +9,6 @@ import java.io.PrintWriter;
 
 import com.codurance.training.io.Input;
 import com.codurance.training.io.Output;
-import com.codurance.training.entity.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
