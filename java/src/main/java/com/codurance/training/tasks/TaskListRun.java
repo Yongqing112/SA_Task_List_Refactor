@@ -1,5 +1,7 @@
 package com.codurance.training.tasks;
 
+import com.codurance.training.command.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
