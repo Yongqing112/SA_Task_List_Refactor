@@ -1,7 +1,7 @@
-package com.codurance.training.usecase.command;
+package com.codurance.training.command;
 
-import com.codurance.training.entity.Task;
-import com.codurance.training.entity.TaskList;
+import com.codurance.training.tasks.Task;
+import com.codurance.training.tasks.TaskList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,6 @@ public class ShowCommand implements Command {
     }
     @Override
     public List<String> execute(String arg) {
-        results.clear();
         for (Map.Entry<String, List<Task>> project : taskList.getTaskList().entrySet()) {
             results.add(project.getKey() + "\r\n");
             displayTask(project.getValue());

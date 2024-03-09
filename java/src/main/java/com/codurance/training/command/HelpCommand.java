@@ -1,4 +1,4 @@
-package com.codurance.training.usecase.command;
+package com.codurance.training.command;
 
 import java.util.ArrayList;
 import java.util.List;
