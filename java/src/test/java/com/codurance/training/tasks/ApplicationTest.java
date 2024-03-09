@@ -96,21 +96,46 @@ public final class ApplicationTest {
                 ""
         );
 
-        execute("delete 3");
+        execute("uncheck 1");
 
         execute("show");
         readLines(
                 "secrets",
-                "    [x] 1: Eat more donuts.",
+                "    [ ] 1: Eat more donuts.",
                 "    [ ] 2: Destroy all humans.",
                 "",
                 "training",
+                "    [x] 3: Four Elements of Simple Design",
                 "    [ ] 4: SOLID",
                 "    [x] 5: Coupling and Cohesion",
                 "    [x] 6: Primitive Obsession",
                 "    [ ] 7: Outside-In TDD",
                 "    [ ] 8: Interaction-Driven Design",
                 ""
+        );
+
+        execute("add task notExistProject notExistProject");
+
+        readLines(
+                "Could not find a project with the name \"notExistProject\"."
+        );
+
+        execute("check 9");
+
+        readLines(
+                "Could not find a task with an ID of 9."
+        );
+
+        execute("uncheck 9");
+
+        readLines(
+                "Could not find a task with an ID of 9."
+        );
+
+        execute("notExistCommand");
+
+        readLines(
+                "I don't know what the command \"notExistCommand\" is."
         );
 
         execute("quit");

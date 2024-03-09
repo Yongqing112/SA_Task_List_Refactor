@@ -49,22 +49,27 @@ public final class TaskListRun implements Runnable {
 
     private void initializeCommandMap() {
         commandMap = new HashMap<String, Command>();
-        commandMap.put("show", new ShowCommand(taskList.getTaskList(), out));
-        commandMap.put("add", new AddCommand(taskList.getTaskList(), out));
-        commandMap.put("delete", new DeleteCommand(taskList.getTaskList(), out));
-        commandMap.put("check", new CheckCommand(taskList.getTaskList(), out));
-        commandMap.put("uncheck", new UnCheckCommand(taskList.getTaskList(), out));
-        commandMap.put("help", new HelpCommand(out));
+        commandMap.put("show", new ShowCommand(taskList));
+        commandMap.put("add", new AddCommand(taskList));
+        commandMap.put("check", new CheckCommand(taskList));
+        commandMap.put("uncheck", new UnCheckCommand(taskList));
+        commandMap.put("help", new HelpCommand());
     }
 
     private void execute(String commandLine) {
         String[] commandRest = commandLine.split(" ", 2);
-        Command command = commandMap.getOrDefault(commandRest[0], new ErrorCommand(out));
+        Command command = commandMap.getOrDefault(commandRest[0], new ErrorCommand());
         if(commandRest.length > 1){
-            command.execute(commandRest[1]);
+            List<String> results = command.execute(commandRest[1]);
+            for(String result: results){
+                out.print(result);
+            }
         }
         else{
-            command.execute(commandLine);
+            List<String> results = command.execute(commandLine);
+            for(String result: results){
+                out.print(result);
+            }
         }
     }
 }

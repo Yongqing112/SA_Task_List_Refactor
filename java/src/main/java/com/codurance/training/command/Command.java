@@ -1,5 +1,7 @@
 package com.codurance.training.command;
 
+import java.util.List;
+
 public interface Command {
-    void execute(String command);
+    List<String> execute(String command);
 }

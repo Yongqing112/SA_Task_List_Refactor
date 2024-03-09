@@ -1,23 +1,25 @@
 package com.codurance.training.command;
 
 import com.codurance.training.tasks.Task;
-import java.io.PrintWriter;
+import com.codurance.training.tasks.TaskList;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class UnCheckCommand implements Command {
-    private final PrintWriter out;
+    private final TaskList taskList;
+    private final List<String> results;
 
-    private final Map<String, List<Task>> projects;
-
-    public UnCheckCommand(Map<String, List<Task>> projects, PrintWriter out){
-        this.projects = projects;
-        this.out = out;
+    public UnCheckCommand(TaskList taskList){
+        this.taskList = taskList;
+        this.results = new ArrayList<String>();
     }
 
     @Override
-    public void execute(String idString) {
-        setDone(idString, false, projects);
+    public List<String> execute(String idString) {
+        setDone(idString, false, taskList);
+        return results;
     }
 
     private Task findTask(int id, Map.Entry<String, List<Task>> project){
@@ -29,16 +31,16 @@ public class UnCheckCommand implements Command {
         return null;
     }
 
-    private void setDone(String idString, boolean done, Map<String, List<Task>> projects) {
+    private void setDone(String idString, boolean done, TaskList taskList) {
         int id = Integer.parseInt(idString);
-        for (Map.Entry<String, List<Task>> project : projects.entrySet()) {
+        for (Map.Entry<String, List<Task>> project : taskList.getTaskList().entrySet()) {
             Task task = findTask(id, project);
             if(task != null){
                 task.setDone(done);
                 return;
             }
         }
-        out.printf("Could not find a task with an ID of %d.", id);
-        out.println();
+        results.add("Could not find a task with an ID of " + id + ".");
+        results.add("\r\n");
     }
 }

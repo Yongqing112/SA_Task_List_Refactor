@@ -1,18 +1,20 @@
 package com.codurance.training.command;
 
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ErrorCommand implements Command {
 
-    private final PrintWriter out;
+    private final List<String> results;
 
-    public ErrorCommand(PrintWriter out){
-        this.out = out;
+    public ErrorCommand(){
+        this.results = new ArrayList<String>();
     }
 
     @Override
-    public void execute(String commandLine) {
-        out.printf("I don't know what the command \"%s\" is.", commandLine);
-        out.println();
+    public List<String> execute(String commandLine) {
+        results.add("I don't know what the command \"" + commandLine + "\" is.");
+        results.add("\r\n");
+        return results;
     }
 }

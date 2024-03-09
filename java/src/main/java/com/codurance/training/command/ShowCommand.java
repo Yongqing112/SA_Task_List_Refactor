@@ -1,30 +1,34 @@
 package com.codurance.training.command;
 
 import com.codurance.training.tasks.Task;
-import java.io.PrintWriter;
+import com.codurance.training.tasks.TaskList;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class ShowCommand implements Command {
-    private final PrintWriter out;
-    private final Map<String, List<Task>> projects;
+    private final TaskList taskList;
+    private final List<String> results;
 
-    public ShowCommand(Map<String, List<Task>> projects, PrintWriter out){
-        this.projects = projects;
-        this.out = out;
+    public ShowCommand(TaskList taskList){
+        this.taskList = taskList;
+        this.results = new ArrayList<String>();
     }
 
     private void displayTask(List<Task> taskList){
         for (Task task : taskList) {
-            out.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());
+            char done = task.isDone() ? 'x' : ' ';
+            results.add("    ["+ done + "] " + task.getId() + ": " + task.getDescription() + "\r\n");
         }
     }
     @Override
-    public void execute(String arg) {
-        for (Map.Entry<String, List<Task>> project : projects.entrySet()) {
-            out.println(project.getKey());
+    public List<String> execute(String arg) {
+        for (Map.Entry<String, List<Task>> project : taskList.getTaskList().entrySet()) {
+            results.add(project.getKey() + "\r\n");
             displayTask(project.getValue());
-            out.println();
+            results.add("\r\n");
         }
+        return results;
     }
 }
