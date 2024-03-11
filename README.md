@@ -2,21 +2,23 @@
 
 2024/03/11
 1.  Rearrange classes to conform to Clean Architecture
-    -  Entity
+    -  **entity**
         -    Task
         -    TaskList
-    -  Use case
-        -    Command(Interface)
-        -    ShowCommand
-        -    AddCommand
-        -    DeleteCommand
-        -    CheckCommand
-        -    UnCheckCommand
-        -    HelpCommand
-        -    ErrorCommand
-    -  Interface Adapter
-        -    CommandController
-    -  Framework & Driver
+    -  **usecase**
+        -    command
+             -    Command(Interface)
+             -    ShowCommand
+             -    AddCommand
+             -    DeleteCommand
+             -    CheckCommand
+             -    UnCheckCommand
+             -    HelpCommand
+             -    ErrorCommand
+    -  **interfaceAdapter**
+        -    controller  
+             -    CommandController
+    -  **io(Framework & Driver)**
         -    Input
         -    Output
         -    TaskListRun
