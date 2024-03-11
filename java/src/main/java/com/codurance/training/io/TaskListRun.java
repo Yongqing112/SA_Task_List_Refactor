@@ -1,6 +1,7 @@
 package com.codurance.training.io;
 
 import com.codurance.training.interfaceAdapter.controller.CommandController;
+import com.codurance.training.interfaceAdapter.presenter.CommandPresenter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,7 +22,6 @@ public final class TaskListRun implements Runnable {
     }
 
     public static void main(String[] args) throws Exception {
-//        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         Input reader = new Input( new BufferedReader(new InputStreamReader(System.in)));
         Output writer = new Output(new PrintWriter(System.out));
         new TaskListRun(reader, writer).run();
@@ -45,6 +45,7 @@ public final class TaskListRun implements Runnable {
 
     private void execute(String commandLine) {
         commandController.execute(commandLine);
-        writer.output(commandController.getResults());
+        CommandPresenter commandPresenter = new CommandPresenter(commandController.getResults());
+        writer.output(commandPresenter.getResults());
     }
 }
