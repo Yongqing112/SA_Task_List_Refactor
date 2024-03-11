@@ -6,30 +6,21 @@
         -    Task
         -    TaskList
     -  **usecase**
-        -    command
+        -    UseCaseInteractor
+        -    **command**
              -    Command(Interface)
-             -    ShowCommand
-             -    AddCommand
-             -    DeleteCommand
-             -    CheckCommand
-             -    UnCheckCommand
-             -    HelpCommand
-             -    ErrorCommand
+        -    **inputPort**
+             -    InputBoundary(interface)
+             -    inputData
+        -    **outputPort**
+             -    OutputBoundary(interface)
+             -    OutputData
     -  **interfaceAdapter**
-        -    controller  
+        -    **controller**
              -    CommandController
+        -    **presenter**
+             -    CommandPresenter
     -  **io(Framework & Driver)**
         -    Input
         -    Output
         -    TaskListRun
-
-2024/03/09  
-1.  Extract commands to be objects and rearrange classes to command package  
-    -  Command(Interface)
-    -  ShowCommand
-    -  AddCommand
-    -  DeleteCommand
-    -  CheckCommand
-    -  UnCheckCommand
-    -  HelpCommand
-    -  ErrorCommand
