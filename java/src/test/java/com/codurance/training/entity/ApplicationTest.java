@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 
 import com.codurance.training.io.Input;
 import com.codurance.training.io.Output;
+import com.codurance.training.io.TaskListRun;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

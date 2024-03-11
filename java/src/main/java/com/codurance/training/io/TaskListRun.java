@@ -1,8 +1,6 @@
-package com.codurance.training.entity;
+package com.codurance.training.io;
 
-import com.codurance.training.controller.CommandController;
-import com.codurance.training.io.Input;
-import com.codurance.training.io.Output;
+import com.codurance.training.interfaceAdapter.controller.CommandController;
 
 import java.io.BufferedReader;
 import java.io.IOException;

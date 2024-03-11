@@ -1,4 +1,4 @@
-package com.codurance.training.controller;
+package com.codurance.training.interfaceAdapter.controller;
 
 import com.codurance.training.usecase.command.*;
 import com.codurance.training.entity.TaskList;
