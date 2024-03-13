@@ -1,4 +1,4 @@
-package com.codurance.training.io;
+package com.codurance.training.persistence.io;
 
 import java.io.PrintWriter;
 import java.util.List;
@@ -15,7 +15,7 @@ public class Output {
         out.flush();
     }
 
-    public void output(List<String> results){
+    public void printOutputData(List<String> results){
         for(String result: results){
             out.print(result);
         }

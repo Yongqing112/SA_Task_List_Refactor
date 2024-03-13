@@ -1,17 +1,17 @@
 package com.codurance.training.interfaceAdapter.presenter;
 
-import com.codurance.training.usecase.ouputPort.OutputBoundary;
+import com.codurance.training.usecase.UseCaseInteractor;
 
 import java.util.List;
 
 public class CommandPresenter {
-    private final OutputBoundary results;
+    private final UseCaseInteractor useCaseInteractor;
 
-    public CommandPresenter(OutputBoundary results){
-        this.results = results;
+    public CommandPresenter(UseCaseInteractor useCaseInteractor){
+        this.useCaseInteractor = useCaseInteractor;
     }
 
     public List<String> getResults(){
-        return results.getResults();
+        return useCaseInteractor.getOutputData().getResults();
     }
 }

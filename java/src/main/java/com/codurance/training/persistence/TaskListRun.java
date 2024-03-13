@@ -1,7 +1,10 @@
-package com.codurance.training.io;
+package com.codurance.training.persistence;
 
 import com.codurance.training.interfaceAdapter.controller.CommandController;
 import com.codurance.training.interfaceAdapter.presenter.CommandPresenter;
+import com.codurance.training.persistence.io.Input;
+import com.codurance.training.persistence.io.Output;
+import com.codurance.training.usecase.UseCaseInteractor;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,12 +16,16 @@ public final class TaskListRun implements Runnable {
     private static final String QUIT = "quit";
     private final Input reader;
     private final Output writer;
+    private final UseCaseInteractor useCaseInteractor;
     private final CommandController commandController;
+    private final CommandPresenter commandPresenter;
 
     public TaskListRun(Input reader, Output writer) {
         this.reader = reader;
         this.writer = writer;
-        this.commandController = new CommandController();
+        useCaseInteractor = new UseCaseInteractor();
+        this.commandController = new CommandController(useCaseInteractor);
+        this.commandPresenter = new CommandPresenter(useCaseInteractor);
     }
 
     public static void main(String[] args) throws Exception {
@@ -44,8 +51,7 @@ public final class TaskListRun implements Runnable {
     }
 
     private void execute(String commandLine) {
-        commandController.execute(commandLine);
-        CommandPresenter commandPresenter = new CommandPresenter(commandController.getResults());
-        writer.output(commandPresenter.getResults());
+        commandController.executeController(commandLine);
+        writer.printOutputData(commandPresenter.getResults());
     }
 }

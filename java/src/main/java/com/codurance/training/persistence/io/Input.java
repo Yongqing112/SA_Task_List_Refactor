@@ -1,4 +1,4 @@
-package com.codurance.training.io;
+package com.codurance.training.persistence.io;
 
 import java.io.BufferedReader;
 import java.io.IOException;
