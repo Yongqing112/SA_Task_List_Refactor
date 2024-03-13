@@ -1,24 +1,25 @@
-package com.codurance.training.usecase.command;
+package com.codurance.training.tasks.usecase.command;
 
-import com.codurance.training.entity.Task;
-import com.codurance.training.entity.TaskList;
+import com.codurance.training.tasks.entity.Task;
+import com.codurance.training.tasks.entity.TaskList;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class UnCheckCommand implements Command {
+public class CheckCommand implements Command {
+
     private final TaskList taskList;
     private final List<String> results;
 
-    public UnCheckCommand(TaskList taskList){
+    public CheckCommand(TaskList taskList){
         this.taskList = taskList;
         this.results = new ArrayList<String>();
     }
 
     @Override
     public List<String> execute(String idString) {
-        setDone(idString, false, taskList);
+        setDone(idString, true, taskList);
         return results;
     }
 

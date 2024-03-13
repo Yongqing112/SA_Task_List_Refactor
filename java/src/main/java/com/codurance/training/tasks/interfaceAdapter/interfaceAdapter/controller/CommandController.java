@@ -1,8 +1,8 @@
-package com.codurance.training.interfaceAdapter.controller;
+package com.codurance.training.tasks.interfaceAdapter.interfaceAdapter.controller;
 
-import com.codurance.training.usecase.UseCaseInteractor;
-import com.codurance.training.usecase.inputPort.InputBoundary;
-import com.codurance.training.usecase.inputPort.InputData;
+import com.codurance.training.tasks.usecase.UseCaseInteractor;
+import com.codurance.training.tasks.usecase.inputPort.InputBoundary;
+import com.codurance.training.tasks.usecase.inputPort.InputData;
 
 public class CommandController {
     private final UseCaseInteractor useCaseInteractor;

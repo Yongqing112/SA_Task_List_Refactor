@@ -7,9 +7,9 @@ import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintWriter;
 
-import com.codurance.training.persistence.io.Input;
-import com.codurance.training.persistence.io.Output;
-import com.codurance.training.persistence.TaskListRun;
+import com.codurance.training.tasks.persistence.io.Input;
+import com.codurance.training.tasks.persistence.io.Output;
+import com.codurance.training.tasks.persistence.TaskListRun;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

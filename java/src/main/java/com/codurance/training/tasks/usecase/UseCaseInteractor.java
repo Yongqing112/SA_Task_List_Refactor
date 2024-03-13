@@ -1,10 +1,10 @@
-package com.codurance.training.usecase;
+package com.codurance.training.tasks.usecase;
 
-import com.codurance.training.entity.TaskList;
-import com.codurance.training.usecase.command.*;
-import com.codurance.training.usecase.inputPort.InputBoundary;
-import com.codurance.training.usecase.ouputPort.OutputBoundary;
-import com.codurance.training.usecase.ouputPort.OutputData;
+import com.codurance.training.tasks.entity.TaskList;
+import com.codurance.training.tasks.usecase.command.*;
+import com.codurance.training.tasks.usecase.ouputPort.OutputBoundary;
+import com.codurance.training.tasks.usecase.inputPort.InputBoundary;
+import com.codurance.training.tasks.usecase.ouputPort.OutputData;
 
 import java.util.HashMap;
 import java.util.List;

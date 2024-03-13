@@ -1,10 +1,10 @@
-package com.codurance.training.persistence;
+package com.codurance.training.tasks.persistence;
 
-import com.codurance.training.interfaceAdapter.controller.CommandController;
-import com.codurance.training.interfaceAdapter.presenter.CommandPresenter;
-import com.codurance.training.persistence.io.Input;
-import com.codurance.training.persistence.io.Output;
-import com.codurance.training.usecase.UseCaseInteractor;
+import com.codurance.training.tasks.interfaceAdapter.interfaceAdapter.controller.CommandController;
+import com.codurance.training.tasks.interfaceAdapter.interfaceAdapter.presenter.CommandPresenter;
+import com.codurance.training.tasks.persistence.io.Input;
+import com.codurance.training.tasks.persistence.io.Output;
+import com.codurance.training.tasks.usecase.UseCaseInteractor;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,6 +1,6 @@
-package com.codurance.training.interfaceAdapter.presenter;
+package com.codurance.training.tasks.interfaceAdapter.interfaceAdapter.presenter;
 
-import com.codurance.training.usecase.UseCaseInteractor;
+import com.codurance.training.tasks.usecase.UseCaseInteractor;
 
 import java.util.List;
 

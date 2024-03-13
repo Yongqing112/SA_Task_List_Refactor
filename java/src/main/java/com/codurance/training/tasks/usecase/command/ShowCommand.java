@@ -1,7 +1,7 @@
-package com.codurance.training.usecase.command;
+package com.codurance.training.tasks.usecase.command;
 
-import com.codurance.training.entity.Task;
-import com.codurance.training.entity.TaskList;
+import com.codurance.training.tasks.entity.Task;
+import com.codurance.training.tasks.entity.TaskList;
 
 import java.util.ArrayList;
 import java.util.List;

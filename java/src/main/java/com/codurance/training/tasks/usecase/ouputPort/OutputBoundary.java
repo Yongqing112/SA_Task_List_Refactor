@@ -1,4 +1,4 @@
-package com.codurance.training.usecase.ouputPort;
+package com.codurance.training.tasks.usecase.ouputPort;
 
 import java.util.List;
 
