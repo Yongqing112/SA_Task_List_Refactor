@@ -1,6 +1,6 @@
 # Task List &nbsp; [![Build Status](https://travis-ci.org/codurance/task-list.png)](https://travis-ci.org/codurance/task-list)
 
-2024/03/11
+2024/03/13
 1.  Rearrange classes to conform to Clean Architecture
     -  **entity**
         -    Task
@@ -20,7 +20,8 @@
              -    CommandController
         -    **presenter**
              -    CommandPresenter
-    -  **io(Framework & Driver)**
-        -    Input
-        -    Output
+    -  **Persistence(Framework & Driver)**
+        -    **io**
+             -    Input
+             -    Output
         -    TaskListRun
