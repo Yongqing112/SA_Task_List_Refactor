@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HelpCommand implements Command {
-
-    private final List<String> results;
-
     public HelpCommand(){
-        this.results = new ArrayList<String>();
     }
 
     @Override
     public List<String> execute(String arg) {
+        List<String> results = new ArrayList<>();
         results.add("Commands:\r\n");
         results.add("  show\r\n");
         results.add("  add project <project name>\r\n");

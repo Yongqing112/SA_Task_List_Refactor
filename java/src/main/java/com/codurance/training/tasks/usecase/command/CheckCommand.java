@@ -10,17 +10,14 @@ import java.util.Map;
 public class CheckCommand implements Command {
 
     private final TaskList taskList;
-    private final List<String> results;
 
     public CheckCommand(TaskList taskList){
         this.taskList = taskList;
-        this.results = new ArrayList<String>();
     }
 
     @Override
     public List<String> execute(String idString) {
-        setDone(idString, true, taskList);
-        return results;
+        return setDone(idString, true, taskList);
     }
 
     private Task findTask(int id, Map.Entry<String, List<Task>> project){
@@ -32,16 +29,18 @@ public class CheckCommand implements Command {
         return null;
     }
 
-    private void setDone(String idString, boolean done, TaskList taskList) {
+    private List<String> setDone(String idString, boolean done, TaskList taskList) {
         int id = Integer.parseInt(idString);
+        List<String> results = new ArrayList<>();
         for (Map.Entry<String, List<Task>> project : taskList.getTaskList().entrySet()) {
             Task task = findTask(id, project);
             if(task != null){
                 task.setDone(done);
-                return;
+                return results;
             }
         }
         results.add("Could not find a task with an ID of " + id + ".");
         results.add("\r\n");
+        return results;
     }
 }

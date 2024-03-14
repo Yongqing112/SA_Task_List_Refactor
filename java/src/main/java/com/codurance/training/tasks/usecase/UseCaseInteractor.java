@@ -20,7 +20,7 @@ public class UseCaseInteractor {
     }
 
     private void initializeCommandMap() {
-        commandMap = new HashMap<String, Command>();
+        commandMap = new HashMap<>();
         commandMap.put("show", new ShowCommand(taskList));
         commandMap.put("add", new AddCommand(taskList));
         commandMap.put("check", new CheckCommand(taskList));

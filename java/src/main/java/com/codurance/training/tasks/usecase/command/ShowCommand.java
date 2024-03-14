@@ -9,14 +9,11 @@ import java.util.Map;
 
 public class ShowCommand implements Command {
     private final TaskList taskList;
-    private final List<String> results;
-
     public ShowCommand(TaskList taskList){
         this.taskList = taskList;
-        this.results = new ArrayList<String>();
     }
 
-    private void displayTask(List<Task> taskList){
+    private void displayTask(List<Task> taskList, List<String> results){
         for (Task task : taskList) {
             char done = task.isDone() ? 'x' : ' ';
             results.add("    ["+ done + "] " + task.getId() + ": " + task.getDescription() + "\r\n");
@@ -24,10 +21,10 @@ public class ShowCommand implements Command {
     }
     @Override
     public List<String> execute(String arg) {
-        results.clear();
+        List<String> results = new ArrayList<>();
         for (Map.Entry<String, List<Task>> project : taskList.getTaskList().entrySet()) {
             results.add(project.getKey() + "\r\n");
-            displayTask(project.getValue());
+            displayTask(project.getValue(), results);
             results.add("\r\n");
         }
         return results;
