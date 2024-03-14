@@ -3,6 +3,7 @@ package com.codurance.training.tasks.interfaceAdapter.interfaceAdapter.controlle
 import com.codurance.training.tasks.usecase.UseCaseInteractor;
 import com.codurance.training.tasks.usecase.inputPort.InputBoundary;
 import com.codurance.training.tasks.usecase.inputPort.InputData;
+import com.codurance.training.tasks.usecase.ouputPort.OutputBoundary;
 
 public class CommandController {
     private final UseCaseInteractor useCaseInteractor;
@@ -12,8 +13,8 @@ public class CommandController {
     }
 
 
-    public void executeController(String commandLine){
+    public OutputBoundary executeController(String commandLine){
         InputBoundary inputCommand = new InputData(commandLine);
-        useCaseInteractor.executeCommand(inputCommand);
+        return useCaseInteractor.executeCommand(inputCommand);
     }
 }

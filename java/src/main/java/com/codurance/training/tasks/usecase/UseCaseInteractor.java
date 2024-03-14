@@ -13,7 +13,6 @@ import java.util.Map;
 public class UseCaseInteractor {
     private Map<String, Command> commandMap;
     private final TaskList taskList;
-    private List<String> outputData;
 
     public UseCaseInteractor() {
         this.taskList = new TaskList();
@@ -29,20 +28,18 @@ public class UseCaseInteractor {
         commandMap.put("help", new HelpCommand());
     }
 
-    public void executeCommand(InputBoundary inputCommand) {
+    public OutputBoundary executeCommand(InputBoundary inputCommand) {
         String commandLine = inputCommand.getInputCommand();
         String[] commandRest = commandLine.split(" ", 2);
         Command command = commandMap.getOrDefault(commandRest[0], new ErrorCommand());
 
+        List<String> outputData;
         if(commandRest.length > 1){
             outputData = command.execute(commandRest[1]);
         }
         else{
             outputData = command.execute(commandLine);
         }
-    }
-
-    public OutputBoundary getOutputData(){
         return new OutputData(outputData);
     }
 }

@@ -16,16 +16,13 @@ public final class TaskListRunner implements Runnable {
     private static final String QUIT = "quit";
     private final Input reader;
     private final Output writer;
-    private final UseCaseInteractor useCaseInteractor;
     private final CommandController commandController;
-    private final CommandPresenter commandPresenter;
 
     public TaskListRunner(Input reader, Output writer) {
         this.reader = reader;
         this.writer = writer;
-        useCaseInteractor = new UseCaseInteractor();
+        UseCaseInteractor useCaseInteractor = new UseCaseInteractor();
         this.commandController = new CommandController(useCaseInteractor);
-        this.commandPresenter = new CommandPresenter(useCaseInteractor);
     }
 
     public static void main(String[] args) throws Exception {
@@ -51,7 +48,7 @@ public final class TaskListRunner implements Runnable {
     }
 
     private void execute(String commandLine) {
-        commandController.executeController(commandLine);
+        CommandPresenter commandPresenter = new CommandPresenter(commandController.executeController(commandLine));
         writer.printOutputData(commandPresenter.getResults());
     }
 }
