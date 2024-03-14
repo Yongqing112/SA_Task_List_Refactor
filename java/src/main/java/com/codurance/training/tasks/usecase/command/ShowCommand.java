@@ -1,5 +1,6 @@
 package com.codurance.training.tasks.usecase.command;
 
+import com.codurance.training.tasks.entity.ProjectName;
 import com.codurance.training.tasks.entity.Task;
 import com.codurance.training.tasks.entity.TaskList;
 import com.codurance.training.tasks.usecase.inputPort.InputBoundary;
@@ -23,7 +24,7 @@ public class ShowCommand implements Command {
     @Override
     public List<String> execute(InputBoundary inputSubcommand) {
         List<String> results = new ArrayList<>();
-        for (Map.Entry<String, List<Task>> project : taskList.getTaskList().entrySet()) {
+        for (Map.Entry<ProjectName, List<Task>> project : taskList.getTasks().entrySet()) {
             results.add(project.getKey() + "\r\n");
             displayTask(project.getValue(), results);
             results.add("\r\n");
