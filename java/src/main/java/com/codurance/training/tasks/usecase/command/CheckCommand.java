@@ -2,6 +2,7 @@ package com.codurance.training.tasks.usecase.command;
 
 import com.codurance.training.tasks.entity.Task;
 import com.codurance.training.tasks.entity.TaskList;
+import com.codurance.training.tasks.usecase.inputPort.InputBoundary;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,8 @@ public class CheckCommand implements Command {
     }
 
     @Override
-    public List<String> execute(String[] idString) {
+    public List<String> execute(InputBoundary inputSubcommand) {
+        String[] idString = inputSubcommand.getInputCommand();
         return setDone(idString[0], true, taskList);
     }
 

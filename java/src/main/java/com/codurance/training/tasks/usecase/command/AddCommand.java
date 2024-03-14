@@ -2,6 +2,8 @@ package com.codurance.training.tasks.usecase.command;
 
 import com.codurance.training.tasks.entity.Task;
 import com.codurance.training.tasks.entity.TaskList;
+import com.codurance.training.tasks.usecase.inputPort.InputBoundary;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +16,8 @@ public class AddCommand implements Command {
     }
 
     @Override
-    public List<String> execute(String[] subcommandRest) {
+    public List<String> execute(InputBoundary inputSubcommand) {
+        String[] subcommandRest = inputSubcommand.getInputCommand();
         String subcommand = subcommandRest[0];
         List<String> results = new ArrayList<>();
         if (subcommand.equals("project")) {

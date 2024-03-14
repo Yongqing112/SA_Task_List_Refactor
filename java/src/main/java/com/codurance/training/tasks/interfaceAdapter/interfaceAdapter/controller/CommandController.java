@@ -2,6 +2,7 @@ package com.codurance.training.tasks.interfaceAdapter.interfaceAdapter.controlle
 
 import com.codurance.training.tasks.entity.TaskList;
 import com.codurance.training.tasks.usecase.command.*;
+import com.codurance.training.tasks.usecase.inputPort.InputData;
 import com.codurance.training.tasks.usecase.ouputPort.OutputBoundary;
 import com.codurance.training.tasks.usecase.ouputPort.OutputData;
 
@@ -34,10 +35,10 @@ public class CommandController {
         List<String> outputData;
         if(commandRest.length > 1){
             String[] subcommandRest = commandRest[1].split(" ", 2);
-            outputData = command.execute(subcommandRest);
+            outputData = command.execute(new InputData(subcommandRest));
         }
         else{
-            outputData = command.execute(commandRest);
+            outputData = command.execute(new InputData(commandRest));
         }
         return new OutputData(outputData);
     }

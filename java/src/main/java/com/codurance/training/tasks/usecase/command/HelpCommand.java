@@ -1,5 +1,7 @@
 package com.codurance.training.tasks.usecase.command;
 
+import com.codurance.training.tasks.usecase.inputPort.InputBoundary;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +10,7 @@ public class HelpCommand implements Command {
     }
 
     @Override
-    public List<String> execute(String[] subcommandRest) {
+    public List<String> execute(InputBoundary inputSubcommand) {
         List<String> results = new ArrayList<>();
         results.add("Commands:\r\n");
         results.add("  show\r\n");
