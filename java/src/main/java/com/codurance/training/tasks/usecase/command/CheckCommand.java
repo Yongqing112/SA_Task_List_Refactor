@@ -16,8 +16,8 @@ public class CheckCommand implements Command {
     }
 
     @Override
-    public List<String> execute(String idString) {
-        return setDone(idString, true, taskList);
+    public List<String> execute(String[] idString) {
+        return setDone(idString[0], true, taskList);
     }
 
     private Task findTask(int id, Map.Entry<String, List<Task>> project){

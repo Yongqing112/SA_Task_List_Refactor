@@ -14,8 +14,7 @@ public class AddCommand implements Command {
     }
 
     @Override
-    public List<String> execute(String commandLine) {
-        String[] subcommandRest = commandLine.split(" ", 2);
+    public List<String> execute(String[] subcommandRest) {
         String subcommand = subcommandRest[0];
         List<String> results = new ArrayList<>();
         if (subcommand.equals("project")) {

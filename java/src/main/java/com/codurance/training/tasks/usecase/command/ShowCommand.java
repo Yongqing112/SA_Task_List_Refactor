@@ -20,7 +20,7 @@ public class ShowCommand implements Command {
         }
     }
     @Override
-    public List<String> execute(String arg) {
+    public List<String> execute(String[] subcommandRest) {
         List<String> results = new ArrayList<>();
         for (Map.Entry<String, List<Task>> project : taskList.getTaskList().entrySet()) {
             results.add(project.getKey() + "\r\n");

@@ -14,8 +14,8 @@ public class UnCheckCommand implements Command {
     }
 
     @Override
-    public List<String> execute(String idString) {
-        return setDone(idString, false, taskList);
+    public List<String> execute(String[] idString) {
+        return setDone(idString[0], false, taskList);
     }
 
     private Task findTask(int id, Map.Entry<String, List<Task>> project){

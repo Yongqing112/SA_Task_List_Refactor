@@ -10,9 +10,9 @@ public class ErrorCommand implements Command {
     }
 
     @Override
-    public List<String> execute(String commandLine) {
+    public List<String> execute(String[] commandRest) {
         List<String> results = new ArrayList<>();
-        results.add("I don't know what the command \"" + commandLine + "\" is.");
+        results.add("I don't know what the command \"" + commandRest[0] + "\" is.");
         results.add("\r\n");
         return results;
     }

@@ -8,7 +8,7 @@ public class HelpCommand implements Command {
     }
 
     @Override
-    public List<String> execute(String arg) {
+    public List<String> execute(String[] subcommandRest) {
         List<String> results = new ArrayList<>();
         results.add("Commands:\r\n");
         results.add("  show\r\n");

@@ -4,7 +4,6 @@ import com.codurance.training.tasks.interfaceAdapter.interfaceAdapter.controller
 import com.codurance.training.tasks.interfaceAdapter.interfaceAdapter.presenter.CommandPresenter;
 import com.codurance.training.tasks.persistence.io.Input;
 import com.codurance.training.tasks.persistence.io.Output;
-import com.codurance.training.tasks.usecase.UseCaseInteractor;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,8 +20,7 @@ public final class TaskListRunner implements Runnable {
     public TaskListRunner(Input reader, Output writer) {
         this.reader = reader;
         this.writer = writer;
-        UseCaseInteractor useCaseInteractor = new UseCaseInteractor();
-        this.commandController = new CommandController(useCaseInteractor);
+        this.commandController = new CommandController();
     }
 
     public static void main(String[] args) throws Exception {
