@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 
-public final class TaskListRun implements Runnable {
+public final class TaskListRunner implements Runnable {
     private static final String QUIT = "quit";
     private final Input reader;
     private final Output writer;
@@ -20,7 +20,7 @@ public final class TaskListRun implements Runnable {
     private final CommandController commandController;
     private final CommandPresenter commandPresenter;
 
-    public TaskListRun(Input reader, Output writer) {
+    public TaskListRunner(Input reader, Output writer) {
         this.reader = reader;
         this.writer = writer;
         useCaseInteractor = new UseCaseInteractor();
@@ -31,7 +31,7 @@ public final class TaskListRun implements Runnable {
     public static void main(String[] args) throws Exception {
         Input reader = new Input( new BufferedReader(new InputStreamReader(System.in)));
         Output writer = new Output(new PrintWriter(System.out));
-        new TaskListRun(reader, writer).run();
+        new TaskListRunner(reader, writer).run();
     }
 
     public void run() {

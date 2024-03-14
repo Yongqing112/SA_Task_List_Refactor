@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 
 import com.codurance.training.tasks.persistence.io.Input;
 import com.codurance.training.tasks.persistence.io.Output;
-import com.codurance.training.tasks.persistence.TaskListRun;
+import com.codurance.training.tasks.persistence.TaskListRunner;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +31,7 @@ public final class ApplicationTest {
     public ApplicationTest() throws IOException {
         Input in = new Input(new BufferedReader(new InputStreamReader(new PipedInputStream(inStream))));
         Output out = new Output(new PrintWriter(new PipedOutputStream(outStream), true));
-        TaskListRun taskList = new TaskListRun(in, out);
+        TaskListRunner taskList = new TaskListRunner(in, out);
         applicationThread = new Thread(taskList);
     }
 
