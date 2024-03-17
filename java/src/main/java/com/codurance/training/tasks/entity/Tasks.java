@@ -3,23 +3,32 @@ package com.codurance.training.tasks.entity;
 import java.util.*;
 
 public class Tasks {
-    private final Map<ProjectName, List<Task>> tasks = new LinkedHashMap<>();
+    private final List<Project> tasks = new ArrayList<>();
 
-    public Set<Map.Entry<ProjectName, List<Task>>> entrySet() {
-        return tasks.entrySet();
+    public List<Project> getProject() {
+        return tasks;
     }
 
-    public void put(ProjectName projectName, List<Task> tasks){
-        this.tasks.put(projectName, tasks);
+    public void add(ProjectName projectName, List<Task> tasks){
+        this.tasks.add(new Project(projectName, tasks));
     }
 
     public List<Task> get(ProjectName projectName){
-        return this.tasks.get(projectName);
-
+        for(Project project: tasks){
+            if(project.equals(projectName)){
+                return project.getTasks();
+            }
+        }
+        return null;
     }
 
     public boolean containsKey(ProjectName projectName){
-        return this.tasks.containsKey(projectName);
+        for(Project project: tasks){
+            if(project.equals(projectName)){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

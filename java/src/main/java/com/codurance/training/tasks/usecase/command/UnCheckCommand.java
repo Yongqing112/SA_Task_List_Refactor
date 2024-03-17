@@ -1,13 +1,12 @@
 package com.codurance.training.tasks.usecase.command;
 
-import com.codurance.training.tasks.entity.ProjectName;
+import com.codurance.training.tasks.entity.Project;
 import com.codurance.training.tasks.entity.Task;
 import com.codurance.training.tasks.entity.TaskList;
 import com.codurance.training.tasks.usecase.inputPort.InputBoundary;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class UnCheckCommand implements Command {
     private final TaskList taskList;
@@ -21,8 +20,8 @@ public class UnCheckCommand implements Command {
         return setDone(idString[0], false, taskList);
     }
 
-    private Task findTask(int id, Map.Entry<ProjectName, List<Task>> project){
-        for (Task task : project.getValue()) {
+    private Task findTask(int id, Project project){
+        for (Task task : project.getTasks()) {
             if (task.getId() == id) {
                 return task;
             }
@@ -33,7 +32,7 @@ public class UnCheckCommand implements Command {
     private List<String> setDone(String idString, boolean done, TaskList taskList) {
         int id = Integer.parseInt(idString);
         List<String> results = new ArrayList<>();
-        for (Map.Entry<ProjectName, List<Task>> project : taskList.getTasks().entrySet()) {
+        for (Project project : taskList.getTasks().getProject()) {
             Task task = findTask(id, project);
             if(task != null){
                 task.setDone(done);

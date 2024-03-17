@@ -31,7 +31,7 @@ public class AddCommand implements Command {
     }
 
     private void addProject(ProjectName projectName, Tasks tasks) {
-        tasks.put(projectName, new ArrayList<>());
+        tasks.add(projectName, new ArrayList<>());
     }
 
     private boolean isProjectExist(ProjectName projectName, Tasks tasks){
