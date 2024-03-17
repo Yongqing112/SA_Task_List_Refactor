@@ -22,10 +22,10 @@ public class AddCommand implements Command {
         String subcommand = subcommandRest[0];
         List<String> results = new ArrayList<>();
         if (subcommand.equals("project")) {
-            addProject(new ProjectName(subcommandRest[1]), this.taskList.getTasks());
+            addProject(ProjectName.of(subcommandRest[1]), this.taskList.getTasks());
         } else if (subcommand.equals("task")) {
             String[] projectTask = subcommandRest[1].split(" ", 2);
-            addTask(new ProjectName(projectTask[0]), projectTask[1], taskList.getTasks(), results);
+            addTask(ProjectName.of(projectTask[0]), projectTask[1], taskList.getTasks(), results);
         }
         return results;
     }
