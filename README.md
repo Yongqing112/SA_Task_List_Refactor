@@ -1,12 +1,12 @@
 # Task List &nbsp; [![Build Status](https://travis-ci.org/codurance/task-list.png)](https://travis-ci.org/codurance/task-list)
 
-2024/03/17
-1.  move UseCaseInteractor to CommandController and Extract classes of Tasks, Project, and ProjectName.
+2024/03/22
+1.  rename Tasks to ProjectList and use Aggregate(TaskList -> ProjectList -> Project -> Task).
     -  **entity**
-        -    Project
         -    ProjectName
+        -    ProjectList
+        -    Project
         -    Task
-        -    Tasks
         -    TaskList
     -  **usecase**
         -    **command**
