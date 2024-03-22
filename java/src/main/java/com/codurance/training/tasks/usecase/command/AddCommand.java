@@ -1,9 +1,6 @@
 package com.codurance.training.tasks.usecase.command;
 
-import com.codurance.training.tasks.entity.ProjectName;
-import com.codurance.training.tasks.entity.Task;
-import com.codurance.training.tasks.entity.TaskList;
-import com.codurance.training.tasks.entity.Tasks;
+import com.codurance.training.tasks.entity.*;
 import com.codurance.training.tasks.usecase.inputPort.InputBoundary;
 
 import java.util.ArrayList;
@@ -22,29 +19,28 @@ public class AddCommand implements Command {
         String subcommand = subcommandRest[0];
         List<String> results = new ArrayList<>();
         if (subcommand.equals("project")) {
-            addProject(ProjectName.of(subcommandRest[1]), this.taskList.getTasks());
+            addProject(ProjectName.of(subcommandRest[1]));
         } else if (subcommand.equals("task")) {
             String[] projectTask = subcommandRest[1].split(" ", 2);
-            addTask(ProjectName.of(projectTask[0]), projectTask[1], taskList.getTasks(), results);
+            addTask(ProjectName.of(projectTask[0]), projectTask[1], results);
         }
         return results;
     }
 
-    private void addProject(ProjectName projectName, Tasks tasks) {
-        tasks.add(projectName, new ArrayList<>());
+    private void addProject(ProjectName projectName) {
+        taskList.addProject(projectName, new ArrayList<>());
     }
 
-    private boolean isProjectExist(ProjectName projectName, Tasks tasks){
-        return tasks.containsKey(projectName);
+    private boolean isProjectExist(ProjectName projectName){
+        return taskList.containsKey(projectName);
     }
 
-    private void addTask(ProjectName projectName, String description, Tasks tasks, List<String> results) {
-        if (!isProjectExist(projectName, tasks)) {
+    private void addTask(ProjectName projectName, String description, List<String> results) {
+        if (!isProjectExist(projectName)) {
             results.add("Could not find a project with the name \"" + projectName + "\".");
             results.add("\r\n");
             return;
         }
-        List<Task> projectTasks = tasks.get(projectName);
-        projectTasks.add(new Task(taskList.nextId(), description, false));
+        taskList.addTask(projectName, new Task(taskList.nextId(), description, false));
     }
 }

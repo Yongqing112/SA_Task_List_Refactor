@@ -34,7 +34,7 @@ public class CheckCommand implements Command {
     private List<String> setDone(String idString, boolean done, TaskList taskList) {
         int id = Integer.parseInt(idString);
         List<String> results = new ArrayList<>();
-        for (Project project : taskList.getTasks().getProject()) {
+        for (Project project : taskList.getProjectList()) {
             Task task = findTask(id, project);
             if(task != null){
                 task.setDone(done);

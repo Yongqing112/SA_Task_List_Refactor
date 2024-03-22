@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.codurance.training</groupId>
-    <artifactId>tasks</artifactId>
+    <artifactId>projectList</artifactId>
     <version>0.1</version>
 
     <name>Task List</name>
@@ -41,7 +41,7 @@
                     <programs>
                         <program>
                             <id>task-list</id>
-                            <mainClass>com.codurance.training.tasks.TaskList</mainClass>
+                            <mainClass>com.codurance.training.projectList.TaskList</mainClass>
                         </program>
                     </programs>
                 </configuration>

@@ -23,7 +23,7 @@ public class ShowCommand implements Command {
     @Override
     public List<String> execute(InputBoundary inputSubcommand) {
         List<String> results = new ArrayList<>();
-        for (Project project : taskList.getTasks().getProject()) {
+        for (Project project : taskList.getProjectList()) {
             results.add(project.getProjectName().toString() + "\r\n");
             displayTask(project.getTasks(), results);
             results.add("\r\n");
