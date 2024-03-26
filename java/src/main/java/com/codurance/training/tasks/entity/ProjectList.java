@@ -37,4 +37,15 @@ public class ProjectList {
         Project project = findProject(projectName);
         project.addTask(task);
     }
+
+    public List<String> setDone(int id, boolean done) {
+        List<String> results = new ArrayList<>();
+        for (Project project : projects) {
+            results = project.setDone(id, done);
+            if(results.isEmpty()){
+                return results;
+            }
+        }
+        return results;
+    }
 }

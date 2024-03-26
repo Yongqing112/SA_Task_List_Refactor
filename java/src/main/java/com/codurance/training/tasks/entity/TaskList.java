@@ -20,15 +20,19 @@ public final class TaskList {
         return ++lastId;
     }
 
-    public void addProject(ProjectName projectName, List<Task> tasks) {
-        projectList.addProject(projectName, tasks);
-    }
-
     public boolean containsKey(ProjectName projectName) {
         return projectList.containsKey(projectName);
     }
 
+    public void addProject(ProjectName projectName, List<Task> tasks) {
+        projectList.addProject(projectName, tasks);
+    }
+
     public void addTask(ProjectName projectName, Task task) {
         projectList.addTask(projectName, task);
+    }
+
+    public List<String> setDone(int id, boolean done) {
+        return projectList.setDone(id, done);
     }
 }

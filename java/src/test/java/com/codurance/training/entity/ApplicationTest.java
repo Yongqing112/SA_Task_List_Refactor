@@ -142,6 +142,19 @@ public final class ApplicationTest {
                 "I don't know what the command \"notExistCommand\" is."
         );
 
+        execute("help");
+
+        readLines(
+                "Commands:",
+                "  show",
+                "  add project <project name>",
+                "  add task <project name> <task description>",
+                "  check <task ID>",
+                "  uncheck <task ID>",
+                ""
+        );
+
+
         execute("quit");
     }
 
