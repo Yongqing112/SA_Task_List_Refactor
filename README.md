@@ -1,12 +1,16 @@
 # Task List &nbsp; [![Build Status](https://travis-ci.org/codurance/task-list.png)](https://travis-ci.org/codurance/task-list)
 
-2024/03/22
-1.  rename Tasks to ProjectList and use Aggregate(TaskList -> ProjectList -> Project -> Task).
+2024/04/06
+1.  (1) Apply DDD tactical designs to the entities layer. (2) Enforce aggregate invariants by implementing ReadOnly subtypes for Project and Task.
     -  **entity**
         -    ProjectName
         -    ProjectList
         -    Project
+        -    ReadOnlyProject
+        -    ReadOnlyTask
+        -    TaskId
         -    Task
+        -    TaskListId
         -    TaskList
     -  **usecase**
         -    **command**
