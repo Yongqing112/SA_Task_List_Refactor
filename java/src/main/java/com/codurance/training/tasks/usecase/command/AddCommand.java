@@ -32,15 +32,15 @@ public class AddCommand implements Command {
     }
 
     private boolean isProjectExist(ProjectName projectName){
-        return taskList.containsKey(projectName);
+        return taskList.containsProject(projectName);
     }
 
     private void addTask(ProjectName projectName, String description, List<String> results) {
         if (!isProjectExist(projectName)) {
-            results.add("Could not find a project with the name \"" + projectName + "\".");
+            results.add("Could not find a project with the name \"" + projectName.name() + "\".");
             results.add("\r\n");
             return;
         }
-        taskList.addTask(projectName, new Task(taskList.nextId(), description, false));
+        taskList.addTask(projectName, TaskId.of(taskList.nextId()), description, false);
     }
 }

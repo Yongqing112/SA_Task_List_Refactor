@@ -20,7 +20,6 @@ public class CheckCommand implements Command {
     }
 
     private List<String> setDone(String idString, boolean done, TaskList taskList) {
-        int id = Integer.parseInt(idString);
-        return taskList.setDone(id, done);
+        return taskList.setDone(idString, done);
     }
 }

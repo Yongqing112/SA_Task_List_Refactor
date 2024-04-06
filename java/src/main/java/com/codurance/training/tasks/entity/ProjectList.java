@@ -6,14 +6,16 @@ public class ProjectList {
     private final List<Project> projects = new ArrayList<>();
 
     public List<Project> getProjectList() {
-        return Collections.unmodifiableList(projects);
+        return projects.stream()
+                .map(p -> (Project) new ReadOnlyProject(p.getName(), p.getTasks()))
+                .toList();
     }
 
     public void addProject(ProjectName projectName, List<Task> tasks){
         this.projects.add(new Project(projectName, tasks));
     }
 
-    public boolean containsKey(ProjectName projectName){
+    public boolean containsProject(ProjectName projectName){
         for(Project project: projects){
             if(project.getProjectName().equals(projectName)){
                 return true;
@@ -33,15 +35,15 @@ public class ProjectList {
         return p.get();
     }
 
-    public void addTask(ProjectName projectName, Task task) {
+    public void addTask(ProjectName projectName, TaskId taskId, String description, boolean done) {
         Project project = findProject(projectName);
-        project.addTask(task);
+        project.addTask(taskId, description, done);
     }
 
-    public List<String> setDone(int id, boolean done) {
+    public List<String> setDone(String idString, boolean done) {
         List<String> results = new ArrayList<>();
         for (Project project : projects) {
-            results = project.setDone(id, done);
+            results = project.setDone(idString, done);
             if(results.isEmpty()){
                 return results;
             }

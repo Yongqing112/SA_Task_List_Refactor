@@ -1,6 +1,7 @@
 package com.codurance.training.tasks.interfaceAdapter.interfaceAdapter.controller;
 
 import com.codurance.training.tasks.entity.TaskList;
+import com.codurance.training.tasks.entity.TaskListId;
 import com.codurance.training.tasks.usecase.command.*;
 import com.codurance.training.tasks.usecase.inputPort.InputData;
 import com.codurance.training.tasks.usecase.ouputPort.OutputBoundary;
@@ -14,8 +15,10 @@ public class CommandController {
     private Map<String, Command> commandMap;
     private final TaskList taskList;
 
+    private static final TaskListId DEFAULT_TO_DO_LIST_ID = TaskListId.of("001");
+
     public CommandController(){
-        this.taskList = new TaskList();
+        this.taskList = new TaskList(DEFAULT_TO_DO_LIST_ID);
         initializeCommandMap();
     }
 
