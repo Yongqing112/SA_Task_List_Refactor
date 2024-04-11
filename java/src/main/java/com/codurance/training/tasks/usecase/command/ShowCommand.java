@@ -2,16 +2,15 @@ package com.codurance.training.tasks.usecase.command;
 
 import com.codurance.training.tasks.entity.Project;
 import com.codurance.training.tasks.entity.Task;
-import com.codurance.training.tasks.entity.TaskId;
-import com.codurance.training.tasks.entity.TaskList;
+import com.codurance.training.tasks.entity.ProjectList;
 import com.codurance.training.tasks.usecase.inputPort.InputBoundary;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShowCommand implements Command {
-    private final TaskList taskList;
-    public ShowCommand(TaskList taskList){
+    private final ProjectList taskList;
+    public ShowCommand(ProjectList taskList){
         this.taskList = taskList;
     }
 
