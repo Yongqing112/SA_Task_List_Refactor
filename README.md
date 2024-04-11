@@ -4,26 +4,26 @@
 1.  (1) Implement Use Case: AddProjectUseCase, AddTaskUseCase, SetDoneUseCase
 2.  (2) Implement Use Case Input: AddProjectInput, AddTaskInput, SetDoneInput, ErrorInput
     -  **entity**
-        -    ProjectListId
+        -    `ProjectListId`
         -    ProjectName
-        -    ProjectList
+        -    `ProjectList`
         -    Project
         -    ReadOnlyProject
         -    ReadOnlyTask
         -    TaskId
         -    Task
     -  **usecase**
-        -    **usecase**
-             -    AddProjectUseCase
-             -    AddTaskUseCase
-             -    SetDoneUseCase
+        -    **command**
+             -    `AddProjectUseCase`
+             -    `AddTaskUseCase`
+             -    `SetDoneUseCase`
         -    **inputPort**
              -    InputBoundary(interface)
              -    inputData
-             -    AddProjectInput
-             -    AddTaskInput
-             -    SetDoneInput
-             -    ErrorInput
+             -    `AddProjectInput`
+             -    `AddTaskInput`
+             -    `SetDoneInput`
+             -    `ErrorInput`
         -    **outputPort**
              -    OutputBoundary(interface)
              -    OutputData
