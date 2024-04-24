@@ -10,10 +10,13 @@ import java.io.PrintWriter;
 import com.codurance.training.tasks.persistence.io.Input;
 import com.codurance.training.tasks.persistence.io.Output;
 import com.codurance.training.tasks.persistence.TaskListRunner;
+import com.codurance.training.tasks.usecase.ProjectListInMemoryRepository;
+import com.codurance.training.tasks.usecase.ProjectListRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.codurance.training.tasks.persistence.TaskListRunner.projectList;
 import static java.lang.System.lineSeparator;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -29,9 +32,13 @@ public final class ApplicationTest {
     private Thread applicationThread;
 
     public ApplicationTest() throws IOException {
-        Input in = new Input(new BufferedReader(new InputStreamReader(new PipedInputStream(inStream))));
-        Output out = new Output(new PrintWriter(new PipedOutputStream(outStream), true));
-        TaskListRunner taskList = new TaskListRunner(in, out);
+//        Input in = new Input(new BufferedReader(new InputStreamReader(new PipedInputStream(inStream))));
+//        Output out = new Output(new PrintWriter(new PipedOutputStream(outStream), true));
+        BufferedReader in = new BufferedReader(new InputStreamReader(new PipedInputStream(inStream)));
+        PrintWriter out = new PrintWriter(new PipedOutputStream(outStream), true);
+        ProjectListRepository repository = new ProjectListInMemoryRepository();
+        repository.save(projectList);
+        TaskListRunner taskList = new TaskListRunner(in, out, repository);
         applicationThread = new Thread(taskList);
     }
 
