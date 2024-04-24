@@ -1,29 +1,29 @@
-# Task List &nbsp; [![Build Status](https://travis-ci.org/codurance/task-list.png)](https://travis-ci.org/codurance/task-list)
+# Task List &nbsp;
 
-2024/04/11
-1.  (1) Implement Use Case: AddProjectUseCase, AddTaskUseCase, SetDoneUseCase
-2.  (2) Implement Use Case Input: AddProjectInput, AddTaskInput, SetDoneInput, ErrorInput
+2024/04/24
+1.  Move AddProjectUseCase to usecase.port.in.project.add and AddProjectUseCase change to Innterface
+
+2.  Add AddProjectService to usecase.service and AddProjectService implement AddProjectUseCase
+
+3.  Move AddTaskInput and AddTaskUseCase to usecase.ouputPort
+
+4.  Implement Repository: ProjectListRepository(Interface) and ProjectListInMemoryRepository
+
     -  **entity**
-        -    `ProjectListId`
+        -    ProjectListId
         -    ProjectName
-        -    `ProjectList`
+        -    ProjectList
         -    Project
         -    ReadOnlyProject
         -    ReadOnlyTask
         -    TaskId
         -    Task
     -  **usecase**
-        -    **command**
-             -    `AddProjectUseCase`
-             -    `AddTaskUseCase`
-             -    `SetDoneUseCase`
-        -    **inputPort**
-             -    InputBoundary(interface)
-             -    inputData
+        -    **Service**
+             -    `AddProjectService`
+        -    **port/project/in/add**
              -    `AddProjectInput`
-             -    `AddTaskInput`
-             -    `SetDoneInput`
-             -    `ErrorInput`
+             -    `AddProjectUseCase`
         -    **outputPort**
              -    OutputBoundary(interface)
              -    OutputData
