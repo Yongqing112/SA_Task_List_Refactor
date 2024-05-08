@@ -1,4 +1,4 @@
-package com.codurance.training.tasks.usecase.ouputPort;
+package com.codurance.training.tasks.usecase.port.in.task.add;
 
 import tw.teddysoft.ezddd.core.usecase.Input;
 
