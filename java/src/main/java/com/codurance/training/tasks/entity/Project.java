@@ -3,7 +3,6 @@ package com.codurance.training.tasks.entity;
 import tw.teddysoft.ezddd.core.entity.Entity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Project implements Entity<ProjectName> {
@@ -25,6 +24,16 @@ public class Project implements Entity<ProjectName> {
 
     public void addTask(TaskId taskId, String description, boolean done) {
         tasks.add(new Task(taskId, description, done));
+    }
+
+    public boolean containTask(String idString){
+        TaskId id = TaskId.of(idString);
+        for (Task task : tasks) {
+            if (task.getId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private Task findTask(String idString){

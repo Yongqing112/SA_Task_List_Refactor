@@ -55,6 +55,10 @@ public final class ProjectList extends AggregateRoot<ProjectListId, DomainEvent>
         }
     }
 
+    public boolean containTask(TaskId taskId) {
+        return projects.stream().anyMatch(p-> p.containTask(taskId.toString()));
+    }
+
     public List<String> setDone(String idString, boolean done) {
         List<String> results = new ArrayList<>();
         for (Project project : projects) {
