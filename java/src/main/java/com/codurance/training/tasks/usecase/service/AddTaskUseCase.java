@@ -1,30 +1,18 @@
 package com.codurance.training.tasks.usecase.service;
 
-import com.codurance.training.tasks.entity.*;
+import com.codurance.training.tasks.entity.ProjectList;
+import com.codurance.training.tasks.entity.ProjectListId;
+import com.codurance.training.tasks.entity.ProjectName;
+import com.codurance.training.tasks.entity.TaskId;
+import com.codurance.training.tasks.usecase.ProjectListRepository;
 import com.codurance.training.tasks.usecase.ouputPort.AddTaskInput;
+import tw.teddysoft.ezddd.cqrs.usecase.CqrsOutput;
+import tw.teddysoft.ezddd.cqrs.usecase.command.Command;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class AddTaskUseCase {
-    private final ProjectList taskList;
-
-    public AddTaskUseCase(ProjectList taskList){
-        this.taskList = taskList;
-    }
-
-    public List<String> execute(AddTaskInput input) {
-        List<String> results = new ArrayList<>();
-        if (!isProjectExist(ProjectName.of(input.projectName))) {
-            results.add("Could not find a project with the name \"" + input.projectName + "\".");
-            results.add("\r\n");
-            return results;
-        }
-        taskList.addTask(ProjectName.of(input.projectName), TaskId.of(taskList.nextId()), input.description, false);
-        return results;
-    }
-
-    private boolean isProjectExist(ProjectName projectName){
-        return taskList.containsProject(projectName);
-    }
+public interface AddTaskUseCase
+        extends Command<AddTaskInput, CqrsOutput> {
 }
