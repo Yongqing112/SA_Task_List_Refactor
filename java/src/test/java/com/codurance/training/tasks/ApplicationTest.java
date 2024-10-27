@@ -96,6 +96,24 @@ public final class ApplicationTest {
                 ""
         );
 
+        execute("add task NotExistProject t1");
+        readLines("Could not find a project with the name \"NotExistProject\".");
+
+        execute("check 9");
+        readLines("Could not find a task with an ID of 9.");
+
+        execute("help");
+        readLines("Commands:",
+                "  show",
+                "  add project <project name>",
+                "  add task <project name> <task description>",
+                "  check <task ID>",
+                "  uncheck <task ID>",
+                "");
+
+        execute("NotExistCommand");
+        readLines("I don't know what the command \"NotExistCommand\" is.");
+
         execute("quit");
     }
 
