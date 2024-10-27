@@ -1,20 +1,17 @@
-package com.codurance.training.tasks.entity;
+package com.codurance.training.tasks;
 
-import tw.teddysoft.ezddd.core.entity.Entity;
-
-public class Task implements Entity<TaskId> {
-    private final TaskId id;
+public final class Task {
+    private final long id;
     private final String description;
     private boolean done;
 
-    public Task(TaskId id, String description, boolean done) {
+    public Task(long id, String description, boolean done) {
         this.id = id;
         this.description = description;
         this.done = done;
     }
 
-    @Override
-    public TaskId getId() {
+    public long getId() {
         return id;
     }
 

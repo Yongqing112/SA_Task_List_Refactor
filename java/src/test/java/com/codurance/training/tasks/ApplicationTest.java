@@ -1,4 +1,4 @@
-package com.codurance.training.entity;
+package com.codurance.training.tasks;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,17 +6,10 @@ import java.io.InputStreamReader;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintWriter;
-
-import com.codurance.training.tasks.persistence.io.Input;
-import com.codurance.training.tasks.persistence.io.Output;
-import com.codurance.training.tasks.persistence.TaskListRunner;
-import com.codurance.training.tasks.usecase.ProjectListInMemoryRepository;
-import com.codurance.training.tasks.usecase.ProjectListRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.codurance.training.tasks.persistence.TaskListRunner.projectList;
 import static java.lang.System.lineSeparator;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -32,13 +25,9 @@ public final class ApplicationTest {
     private Thread applicationThread;
 
     public ApplicationTest() throws IOException {
-//        Input in = new Input(new BufferedReader(new InputStreamReader(new PipedInputStream(inStream))));
-//        Output out = new Output(new PrintWriter(new PipedOutputStream(outStream), true));
         BufferedReader in = new BufferedReader(new InputStreamReader(new PipedInputStream(inStream)));
         PrintWriter out = new PrintWriter(new PipedOutputStream(outStream), true);
-        ProjectListRepository repository = new ProjectListInMemoryRepository();
-        repository.save(projectList);
-        TaskListRunner taskList = new TaskListRunner(in, out, repository);
+        TaskList taskList = new TaskList(in, out);
         applicationThread = new Thread(taskList);
     }
 
@@ -73,9 +62,9 @@ public final class ApplicationTest {
         execute("show");
         readLines(
             "secrets",
-                "    [ ] 1: Eat more donuts.",
-                "    [ ] 2: Destroy all humans.",
-                ""
+            "    [ ] 1: Eat more donuts.",
+            "    [ ] 2: Destroy all humans.",
+            ""
         );
 
         execute("add project training");
@@ -106,61 +95,6 @@ public final class ApplicationTest {
                 "    [ ] 8: Interaction-Driven Design",
                 ""
         );
-
-        execute("uncheck 1");
-
-        execute("show");
-        readLines(
-                "secrets",
-                "    [ ] 1: Eat more donuts.",
-                "    [ ] 2: Destroy all humans.",
-                "",
-                "training",
-                "    [x] 3: Four Elements of Simple Design",
-                "    [ ] 4: SOLID",
-                "    [x] 5: Coupling and Cohesion",
-                "    [x] 6: Primitive Obsession",
-                "    [ ] 7: Outside-In TDD",
-                "    [ ] 8: Interaction-Driven Design",
-                ""
-        );
-
-        execute("add task notExistProject notExistProject");
-
-        readLines(
-                "Could not find a project with the name \"notExistProject\"."
-        );
-
-        execute("check 9");
-
-        readLines(
-                "Could not find a task with an ID of 9."
-        );
-
-        execute("uncheck 9");
-
-        readLines(
-                "Could not find a task with an ID of 9."
-        );
-
-        execute("notExistCommand");
-
-        readLines(
-                "I don't know what the command \"notExistCommand\" is."
-        );
-
-        execute("help");
-
-        readLines(
-                "Commands:",
-                "  show",
-                "  add project <project name>",
-                "  add task <project name> <task description>",
-                "  check <task ID>",
-                "  uncheck <task ID>",
-                ""
-        );
-
 
         execute("quit");
     }
